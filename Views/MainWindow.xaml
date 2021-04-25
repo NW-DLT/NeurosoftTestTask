@@ -1,0 +1,39 @@
+﻿<Window x:Class="OptionsListApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OptionsListApp.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="ParamRoot" Background="Lavender">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ToolBar VerticalAlignment="Center" Grid.Row="0">
+            <Button x:Name="AddButton" Content="Добавить" Command="{Binding OpenAddNewOptWindow}"></Button>
+            <Button x:Name="UpButton" Content="Вверх" ></Button>
+            <Button x:Name="DownButton" Content="Вниз" ></Button>
+            <Separator></Separator>
+            <Button x:Name="EditButton" Content="Изменить" Command="{Binding OpenEditNewOptWindow}"></Button>
+            <Separator></Separator>
+            <Button x:Name="DeleteButton" Content="Удалить" Command="{Binding DeleteOpt}"></Button>
+        </ToolBar>
+
+        <DataGrid x:Name="ViewAllOptList" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding AllOpt}" SelectedItem="{Binding SelectedMoreOption}">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Список" Command="{Binding OpenMoreOptListWindow}"></MenuItem>
+                    <MenuItem Header="Изменить" Command="{Binding OpenEditNewOptWindow}"></MenuItem>
+                    <MenuItem Header="Удалить" Command="{Binding DeleteOpt}"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Width="300" IsReadOnly="True" Binding="{Binding Path=Title}" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Тип" Width="*" IsReadOnly="True" Binding="{Binding Path=MoreOptionTypeName.Name}" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
